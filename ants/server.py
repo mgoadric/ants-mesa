@@ -77,11 +77,11 @@ canvas_element = CanvasGrid(diffusion_portrayal, 50, 50, 500, 500)
 model_params = {
     "height": 50,
     "width": 50,
-    "evaporate": UserSettableParameter("slider", "Evaporation Rate", 0.20, 0.01, 0.30, 0.01),
-    "diffusion": UserSettableParameter("slider", "Diffusion Rate", 0.2, 0.0, 1.0, 0.1),
-    "initdrop": UserSettableParameter("slider", "Initial Drop", 500, 100, 1000, 50),
+    "evaporate": UserSettableParameter("slider", "Evaporation Rate", 0.50, 0.01, 0.50, 0.01),
+    "diffusion": UserSettableParameter("slider", "Diffusion Rate", 1.0, 0.0, 1.0, 0.1),
+    "initdrop": UserSettableParameter("slider", "Initial Drop", 100, 100, 1000, 50),
     "prob_random": UserSettableParameter("slider", "Random Move Probability", 0.1, 0.0, 1.0, 0.1),
-    "drop_rate": UserSettableParameter("slider", "Drop Decay Rate", 0.7, 0, 1, 0.01),
+    "drop_rate": UserSettableParameter("slider", "Drop Decay Rate", 0.9, 0, 1, 0.01),
 }
 
 server = ModularServer(

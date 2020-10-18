@@ -10,7 +10,7 @@ class AntWorld(Model):
     Represents the ants foraging for food.
     """
 
-    def __init__(self, height=50, width=50, evaporate=0.20, diffusion=0.1, initdrop=500, lowerbound=0.01, prob_random=0.2, drop_rate=0.65):
+    def __init__(self, height=50, width=50, evaporate=0.5, diffusion=1, initdrop=100, lowerbound=0.01, prob_random=0.1, drop_rate=0.9):
         """
         Create a new playing area of (height, width) cells.
         """
