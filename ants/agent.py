@@ -1,7 +1,7 @@
 from mesa import Agent
 import math
 
-# from sugarscape_cg
+# from Sugarscape_cg
 def get_distance(pos_1, pos_2):
     """ Get the distance between two point
 
@@ -30,8 +30,9 @@ class Environment(Agent):
             model: standard model reference for agent.
         """
         super().__init__(unique_id, model)
-        self.pos = pos
+        #self.pos = pos
         self.amount = 0.0
+        self._nextAmount = 0.0
 
     def step(self):
         """
@@ -49,7 +50,7 @@ class Environment(Agent):
                                 (ave_p - self.amount)))
 
         if self._nextAmount < self.model.lowerbound:
-            self._nextAmount = 0
+            self._nextAmount = 0.0
 
     def advance(self):
         """
@@ -119,8 +120,8 @@ class Food(Agent):
 class Ant(Agent):
     """
     The ants wander around the world in search of food. Upon finding food,
-    they drop a pheremone trail while heading home to store the food. When
-    wandering, they either follow the strongest gradient of pheremone, or move randomly.
+    they drop a pheromone trail while heading home to store the food. When
+    wandering, they either follow the strongest gradient of pheromone, or move randomly.
     """
     def __init__(self, unique_id, home, model, moore=True):
         super().__init__(unique_id, model)
@@ -171,13 +172,13 @@ class Ant(Agent):
                 home.add(1)
                 self.state = "FORAGING"
                 self.drop = 0
-            else: #drop pheremone, and move toward home
+            else: #drop pheromone, and move toward home
                 self.drop_pheromone()
                 self.home_move()
 
     def drop_pheromone(self):
         """
-        Leave pheromone in the Environment and reduce the phermone drop
+        Leave pheromone in the Environment and reduce the pheromone drop
         """
         env = self.get_item(Environment)
         env.add(self.drop)
@@ -214,17 +215,17 @@ class Ant(Agent):
         """
         Step one cell to the pheromone gradient in the Environment
         """
-        # Find the neighbor Environment cell that has the highest phermone amount
+        # Find the neighbor Environment cell that has the highest pheromone amount
         where = (0, 0)
-        max = self.model.lowerbound
+        maxp = self.model.lowerbound
         neighbors = [n for n in self.model.grid.get_neighbors(self.pos, self.moore) if type(n) is Environment]
         for n in neighbors:
-            if n.amount > max:
-                max = n.amount
+            if n.amount > maxp:
+                maxp = n.amount
                 where = n.get_pos()
 
         # When something looks interesting, move there, otherwise randomly move
-        if max > self.model.lowerbound:
+        if maxp > self.model.lowerbound:
             self.model.grid.move_agent(self, where)
         else:
             self.random_move()

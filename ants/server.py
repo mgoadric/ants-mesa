@@ -1,6 +1,6 @@
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.UserParam import UserSettableParameter
+from mesa.visualization import Slider
 
 from .model import AntWorld
 from .agent import Environment, Ant, Food, Home
@@ -77,11 +77,11 @@ canvas_element = CanvasGrid(diffusion_portrayal, 50, 50, 500, 500)
 model_params = {
     "height": 50,
     "width": 50,
-    "evaporate": UserSettableParameter("slider", "Evaporation Rate", 0.50, 0.01, 0.50, 0.01),
-    "diffusion": UserSettableParameter("slider", "Diffusion Rate", 1.0, 0.0, 1.0, 0.1),
-    "initdrop": UserSettableParameter("slider", "Initial Drop", 100, 100, 1000, 50),
-    "prob_random": UserSettableParameter("slider", "Random Move Probability", 0.1, 0.0, 1.0, 0.1),
-    "drop_rate": UserSettableParameter("slider", "Drop Decay Rate", 0.9, 0, 1, 0.01),
+    "evaporate": Slider("Evaporation Rate", 0.50, 0.01, 0.50, 0.01),
+    "diffusion": Slider("Diffusion Rate", 1.0, 0.0, 1.0, 0.1),
+    "initdrop": Slider("Initial Drop", 100, 100, 1000, 50),
+    "prob_random": Slider("Random Move Probability", 0.1, 0.0, 1.0, 0.1),
+    "drop_rate": Slider("Drop Decay Rate", 0.9, 0, 1, 0.01),
 }
 
 server = ModularServer(

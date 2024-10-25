@@ -14,7 +14,7 @@ class AntWorld(Model):
         """
         Create a new playing area of (height, width) cells.
         """
-
+        print("Making World")
         super().__init__()
         self.evaporate = evaporate
         self.diffusion = diffusion
@@ -57,7 +57,7 @@ class AntWorld(Model):
             self.schedule.add(food)
 
         # Place an environment cell at each location
-        for (contents, x, y) in self.grid.coord_iter():
+        for contents, (x, y) in self.grid.coord_iter():
             cell = Environment(self.next_id(), (x, y), self)
             self.grid.place_agent(cell, (x, y))
             self.schedule.add(cell)
